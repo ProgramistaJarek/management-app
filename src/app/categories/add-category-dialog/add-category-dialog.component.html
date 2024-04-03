@@ -1,0 +1,33 @@
+<div mat-dialog-title class="!flex justify-between items-center !pt-2 before:!content-none">
+  <h2>Add category</h2>
+
+  <app-color-picker
+    [chooseColor]="color!"
+    (colorChanged)="updateColor($event)"
+  />
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="categoryForm">
+    <mat-form-field class="w-full">
+      <mat-label>Add category</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [disabled]="!name?.length"
+    [mat-dialog-close]="categoryForm.getRawValue()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

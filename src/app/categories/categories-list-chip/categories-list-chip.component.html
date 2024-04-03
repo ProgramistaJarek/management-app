@@ -1,0 +1,32 @@
+<mat-chip-listbox>
+  @for (category of categories(); track category.id) {
+  <mat-chip-option
+    [ngClass]="returnBackground(category.color!)"
+    (selectionChange)="onCategorySelect(category.id, $event)"
+  >
+    <div class="flex items-center justify-between gap-2">
+      {{ category.name }}
+
+      <div class="flex items-center gap-1 z-50">
+        <button class="flex" (click)="onEditCategory(category, $event)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button class="flex" (click)="onDeleteCategory(category.id, $event)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-chip-option>
+  }
+  <mat-chip-option selectable="false">
+    <div
+      class="flex items-center gap-2 cursor-pointer"
+      (click)="addNewCategory()"
+    >
+      Add
+      <button class="flex">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-chip-option>
+</mat-chip-listbox>

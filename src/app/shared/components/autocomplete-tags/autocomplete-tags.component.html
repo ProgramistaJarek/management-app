@@ -1,0 +1,28 @@
+<mat-form-field class="w-full">
+  <mat-label class="text-black">Tags</mat-label>
+  <mat-chip-grid #chipGrid [disabled]="disabled">
+    @for (tag of selectedTags(); track tag) {
+      <mat-chip-row class="!opacity-100" (removed)="remove(tag.id)">
+        {{ tag.name }}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+  </mat-chip-grid>
+  <input
+    #tagInput
+    placeholder="New Tag..."
+    [(ngModel)]="tagCtrl"
+    (ngModelChange)="filterTags()"
+    [matChipInputFor]="chipGrid"
+    [matAutocomplete]="auto"
+    (matChipInputTokenEnd)="canAddTag && add($event)"
+    [disabled]="disabled"
+  />
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    @for (tag of tags$ | async; track tag.id) {
+      <mat-option [id]="tag.id" [value]="tag.name">{{ tag.name }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Comments list: {{ data.topic }}</h2>
+
+<mat-dialog-content class="!flex flex-col">
+  <mat-list class="overflow-auto">
+    @for (comment of commentsList(); track comment.id) {
+    <mat-list-item>
+      <div class="flex justify-between items-center">
+        {{ comment.content }}
+
+        <button mat-icon-button (click)="onDeleteComment(comment.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    }
+  </mat-list>
+
+  <app-comment-input (saveComment)="onAddNewComment($event)" class="mt-4" />
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

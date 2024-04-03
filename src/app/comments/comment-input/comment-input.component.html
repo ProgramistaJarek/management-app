@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSaveComment()">
+  <mat-form-field class="w-full">
+    <mat-label>Comment text</mat-label>
+    <input
+      matInput
+      [(ngModel)]="comment.content"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      [disabled]="!comment.content"
+      type="submit"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

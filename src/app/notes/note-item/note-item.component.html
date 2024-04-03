@@ -1,0 +1,38 @@
+<mat-card
+  matRipple
+  [matRippleDisabled]="inTrash"
+  (click)="onEditNote(note.id)"
+  [ngClass]="note.color && returnBackground(note.color)"
+  [class.cursor-pointer]="!inTrash"
+>
+  <mat-card-header>
+    <mat-card-title>{{ note.topic }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ note.createdAt | date }}
+      {{ note.updatedAt ? "| " + (note.updatedAt | date) : "" }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ note.description | customSlice: 25 }}</p>
+  </mat-card-content>
+  <mat-card-footer [ngClass]="{ 'py-2': !inTrash }">
+    @if (inTrash) {
+      <button
+        mat-icon-button
+        (click)="onDeleteNote(note.id)"
+        matTooltip="Delete note"
+        [matTooltipShowDelay]="300"
+      >
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="onRestoreNote(note.id)"
+        matTooltip="Restore note"
+        [matTooltipShowDelay]="300"
+      >
+        <mat-icon>restore_from_trash</mat-icon>
+      </button>
+    }
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,29 @@
+<mat-tab-group
+  mat-align-tabs="start"
+  mat-stretch-tabs="false"
+  fitInkBarToContent
+>
+  <mat-tab [label]="'Todos (' + trashTodos().length + ')'">
+    @for (todo of trashTodos(); track todo.id) {
+      <app-todo-item
+        [todo]="todo"
+        [inTrash]="true"
+        (restoreTodo)="onRestoreTodo($event)"
+        (deleteTodo)="onDeleteTodo($event)"
+      />
+    }
+  </mat-tab>
+
+  <mat-tab [label]="'Notes (' + trashNotes().length + ')'">
+    <div class="flex flex-wrap gap-4">
+      @for (note of trashNotes(); track note.id) {
+        <app-note-item
+          [note]="note"
+          [inTrash]="true"
+          (restoreNote)="onRestoreNote($event)"
+          (deleteNote)="onDeleteNote($event)"
+        />
+      }
+    </div>
+  </mat-tab>
+</mat-tab-group>

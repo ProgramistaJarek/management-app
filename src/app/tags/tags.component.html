@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Tag list</h2>
+
+<mat-dialog-content>
+  <mat-list role="list">
+    @for (tag of tagList(); track tag.id) {
+      <mat-list-item role="listitem">
+        <app-tag-item
+          [tag]="tag"
+          [disabledDelete]="checkIfTagCanBeDeleted(tag.id)()"
+          (deleteTag)="onDeleteTag($event)"
+        />
+      </mat-list-item>
+    }
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Ok</button>
+</mat-dialog-actions>

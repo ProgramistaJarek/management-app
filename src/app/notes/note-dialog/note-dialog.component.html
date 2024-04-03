@@ -1,0 +1,37 @@
+<div mat-dialog-title class="!flex justify-between items-center !pt-2 before:!content-none">
+  <h2>Add your note</h2>
+
+  <div class="flex">
+    @if (!editMode) {
+      <app-color-picker
+        [chooseColor]="color!"
+        (colorChanged)="updateColor($event)"
+      />
+    }
+
+    <button mat-icon-button (click)="onEdit()">
+      <mat-icon>{{ editMode ? 'edit_note' : 'done' }}</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-dialog-content class="!pt-1">
+  <form [formGroup]="form">
+    <mat-form-field class="w-full" hideRequiredMarker>
+      <mat-label class="text-black">Topic</mat-label>
+      <input matInput class="!text-black" formControlName="topic"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-full" hideRequiredMarker>
+      <mat-label class="text-black">Description</mat-label>
+      <textarea matInput class="!text-black" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <app-autocomplete-tags formControlName="tags"/>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="note().id" color="warn">Delete</button>
+  <button mat-button mat-dialog-close [disabled]="!editMode" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

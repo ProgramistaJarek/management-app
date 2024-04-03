@@ -1,0 +1,15 @@
+@if (searchResults().notes.length || searchResults().todos.length) {
+  <mat-tab-group mat-align-tabs="start" mat-stretch-tabs="false" fitInkBarToContent>
+    <mat-tab [label]="'Todos (' + searchResults().todos.length + ')'">
+      <app-todo-list
+        [completedTodos]="searchResults().todos"
+        [uncompletedTodos]="searchResults().todos"
+      />
+    </mat-tab>
+    <mat-tab [label]="'Notes (' + searchResults().notes.length + ')'">
+      <app-note-list [selectedNotes]="searchResults().notes" class="block mt-2" />
+    </mat-tab>
+  </mat-tab-group>
+} @else {
+  Not found anything!
+}

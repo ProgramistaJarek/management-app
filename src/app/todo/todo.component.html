@@ -1,0 +1,11 @@
+<div class="w-4/5 mx-auto">
+  <app-add-todo class="w-1/2" [selectCategory]="selectCategory" />
+
+  <app-categories-list-chip (selectCategory)="onSelectCategory($event)" />
+
+  <app-todo-list
+    class="mt-4 w-3/4"
+    [completedTodos]="completedTodos()"
+    [uncompletedTodos]="uncompletedTodos()"
+  />
+</div>

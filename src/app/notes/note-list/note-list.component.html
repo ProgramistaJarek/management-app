@@ -1,0 +1,5 @@
+<div class="flex flex-wrap gap-4">
+  @for (note of selectedNotes; track note.id) {
+    <app-note-item [note]="note" (editNote)="onEditNote($event)" />
+  }
+</div>

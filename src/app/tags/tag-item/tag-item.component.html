@@ -1,0 +1,7 @@
+<div class="flex items-center justify-between">
+  <p>{{ tag.name }}</p>
+
+  <button mat-icon-button (click)="onDeleteTag(tag.id)" [disabled]="disabledDelete">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,28 @@
+<div cdkMenuBar>
+  <button cdkMenuItem mat-icon-button [cdkMenuTriggerFor]="colorMenu">
+    <mat-icon [ngClass]="returnTextColor(chooseColor!)">palette</mat-icon>
+  </button>
+</div>
+
+
+<ng-template #colorMenu>
+  <div cdkMenu>
+    <div class="bg-slate-50 p-2 shadow-lg flex flex-col items-end" cdkMenuItem>
+      <div class="grid grid-cols-5 justify-items-center gap-2 mt-2">
+        @for (color of colors; track color) {
+          <div
+            class="w-6 h-6 cursor-pointer hover:border-2 hover:border-black"
+            [ngClass]="
+        color === chooseColor
+          ? returnBackground(color) + ' border-2 border-black'
+          : returnBackground(color)
+      "
+            (click)="onChooseColor(color)"
+          ></div>
+        }
+      </div>
+
+      <button mat-flat-button (click)="onChooseColor('')">Clear</button>
+    </div>
+  </div>
+</ng-template>

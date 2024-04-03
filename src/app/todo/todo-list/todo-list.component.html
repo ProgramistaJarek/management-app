@@ -1,0 +1,32 @@
+<mat-list class="!flex flex-col gap-2 w-full">
+  <div mat-subheader>To do</div>
+
+  @for (todo of uncompletedTodos; track todo.id) {
+    <mat-list-item>
+      <app-todo-item
+        [todo]="todo"
+        (changeTodo)="updateTodoStatus($event)"
+        (moveTodoToTrash)="onMoveTodoToTrash($event)"
+        (editTodo)="onEditTodo($event)"
+        (openComments)="onOpenCommentsList($event)"
+      />
+    </mat-list-item>
+  }
+</mat-list>
+
+<hr />
+
+<mat-list class="!flex flex-col gap-2 w-full">
+  <div mat-subheader>Done</div>
+  @for (todo of completedTodos; track todo.id) {
+    <mat-list-item>
+      <app-todo-item
+        [todo]="todo"
+        (changeTodo)="updateTodoStatus($event)"
+        (moveTodoToTrash)="onMoveTodoToTrash($event)"
+        (editTodo)="onEditTodo($event)"
+        (openComments)="onOpenCommentsList($event)"
+      />
+    </mat-list-item>
+  }
+</mat-list>

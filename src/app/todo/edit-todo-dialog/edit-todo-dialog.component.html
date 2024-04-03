@@ -1,0 +1,54 @@
+<div mat-dialog-title class="!flex justify-between items-center !pt-2 before:!content-none">
+  <h2>Edit todo</h2>
+
+  <div class="flex">
+    <app-color-picker
+      [chooseColor]="color!"
+      (colorChanged)="updateColor($event)"
+    />
+    <button mat-icon-button (click)="updateStatus(!completed)">
+      <mat-icon>
+        {{ completed ? "task_alt" : "radio_button_unchecked" }}
+      </mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="todoForm">
+    <mat-form-field class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="topic" cdkFocusInitial/>
+    </mat-form-field>
+
+    <div class="flex gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Reminder</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate"/>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          @for (category of categories(); track category.id) {
+            <mat-option [value]="category.id">{{ category.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <app-autocomplete-tags formControlName="tags" />
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button type="submit" [mat-dialog-close]="onEditTodo()">
+    Save
+  </button>
+</mat-dialog-actions>

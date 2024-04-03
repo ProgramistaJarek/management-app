@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-content [ngClass]="returnBackground(todo.color)">
+    <div class="flex items-center justify-between">
+      {{ todo.topic }}
+      <div>
+        @if (!inTrash) {
+          <button mat-icon-button (click)="onOpenComments(todo)">
+            <mat-icon> comment</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="onEditTodo(todo)">
+            <mat-icon> edit</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="onMoveTodoToTrash(todo.id)">
+            <mat-icon> delete</mat-icon>
+          </button>
+        } @else {
+          <button
+            mat-icon-button
+            (click)="onDeleteTodo(todo.id)"
+            matTooltip="Delete todo"
+            [matTooltipShowDelay]="300"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="onRestoreTodo(todo.id)"
+            matTooltip="Restore todo"
+            [matTooltipShowDelay]="300"
+          >
+            <mat-icon>restore_from_trash</mat-icon>
+          </button>
+        }
+
+        <button mat-icon-button (click)="onChangeTodo(!todo.completed)">
+          <mat-icon>
+            {{ todo.completed ? "task_alt" : "radio_button_unchecked" }}
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

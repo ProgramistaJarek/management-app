@@ -1,0 +1,39 @@
+<div class="h-full overflow-hidden flex flex-col">
+  <div class="w-full h-16 flex items-center gap-16 border border-b-gray-300">
+    <div class="flex items-center">
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1 class="text-xl">Todo app</h1>
+    </div>
+
+    <input
+      [formControl]="searchControl"
+      class="border border-b-gray-300 rounded-md h-fit w-1/3 p-2"
+      placeholder="Search by tag"/>
+  </div>
+
+  <mat-drawer-container class="h-full">
+    <mat-drawer mode="side" opened class="w-1/5">
+      <div class="h-full flex flex-col justify-center items-center">
+        <button mat-button routerLinkActive="!font-bold" [routerLink]="'todo'">
+          Todos
+        </button>
+        <button mat-button routerLinkActive="!font-bold" [routerLink]="'notes'">
+          Notes
+        </button>
+        <button mat-button (click)="onOpenTagsDialog()">
+          Tags
+        </button>
+        <button mat-button routerLinkActive="!font-bold" [routerLink]="'trash'">
+          Trash
+        </button>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="mt-4 mx-4">
+        <router-outlet/>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

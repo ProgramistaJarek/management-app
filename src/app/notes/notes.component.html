@@ -1,0 +1,11 @@
+<app-note-list [selectedNotes]="selectedNotes()"/>
+
+<button
+  mat-fab
+  color="primary"
+  class="!absolute bottom-8 right-8"
+  (click)="onAddNote()"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
